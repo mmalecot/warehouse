@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:12.2-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: warehouse
+      POSTGRES_USER: warehouse
+    ports:
+      - 5432:5432

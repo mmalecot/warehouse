@@ -1,0 +1,47 @@
+[package]
+name = "warehouse"
+version = "1.0.0-dev.1"
+authors = ["Mickaël Malécot <mickael.malecot@gmail.com>"]
+edition = "2018"
+
+[profile.release]
+lto = true
+
+[dependencies]
+actix-files = { version = "0.2" }
+actix-identity = { version = "0.2" }
+actix-rt = { version = "1.1" }
+actix-service = { version = "1.0" }
+actix-web = { version = "2.0", features = ["compress", "secure-cookies"] }
+alpm = { version = "0.8" }
+awmp = { version = "0.5", features = ["v2"] }
+base64 = { version = "0.12", features = ["std"] }
+bcrypt = { version = "0.7" }
+chrono = { version = "0.4", features = ["serde", "std"] }
+colored = { version = "1.9" }
+derive_more = { version = "0.99", features = ["display", "from"] }
+diesel = { version = "1.4", features = ["chrono", "r2d2"] }
+diesel_migrations = { version = "1.4" }
+fern = { version = "0.6", features = ["colored"] }
+futures = { version = "0.3" }
+log = { version = "0.4", features = ["serde", "std"] }
+num_cpus = { version = "1.13" }
+r2d2 = { version = "0.8" }
+rand = { version = "0.7", features = ["std"] }
+regex = { version = "1.3" }
+serde = { version = "1.0" }
+tempfile = { version = "3.1" }
+tera = { version = "1.2", features = ["builtins"] }
+toml = { version = "0.5" }
+uuid = { version = "0.8", features = ["v4"] }
+
+[features]
+default = ["run_in_place", "sqlite"]
+
+# Database kinds
+mysql = ["diesel/mysql"]
+postgres = ["diesel/postgres"]
+sqlite = ["diesel/sqlite"]
+
+# Run directly in current working directory structure
+run_in_place = []

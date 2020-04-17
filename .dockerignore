@@ -1,0 +1,23 @@
+# Linux
+*~
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Rust
+target/
+**/*.rs.bk
+
+# Warehouse
+config/
+data/
+log/

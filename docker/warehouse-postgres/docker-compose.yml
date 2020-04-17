@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:12.2-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: warehouse
+      POSTGRES_USER: warehouse
+    ports:
+      - 5432:5432
+
+  warehouse:
+    image: warehouse-postgres
+    restart: always
+    environment:
+      WAREHOUSE_DATABASE_URL: postgres://warehouse:warehouse@postgres/warehouse
+    ports:
+      - 8080:8080

@@ -1,0 +1,156 @@
+{% extends "views/partial/base.html.tera" %}
+{% block title %}Admin{% endblock title %}
+{% block body %}
+  {% include "views/partial/navbar.html.tera" %}
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h6 class="card-title fg-primary">Database configuration</h6>
+            <table class="table table-sm table-borderless mb-0">
+              <tbody>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Pool connection timeout</td>
+                <td class="col-8 py-0">{{ config.database.pool_connection_timeout }} secs</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Pool idle timeout</td>
+                <td class="col-8 py-0">{{ config.database.pool_idle_timeout }} secs</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Pool maximum lifetime</td>
+                <td class="col-8 py-0">{{ config.database.pool_max_lifetime }} secs</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Pool max size</td>
+                <td class="col-8 py-0">{{ config.database.pool_max_size }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Pool min idle</td>
+                <td class="col-8 py-0">{{ config.database.pool_min_idle }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">URL</td>
+                <td class="col-8 py-0">{{ config.database.url }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h6 class="card-title fg-primary">Logger configuration</h6>
+            <table class="table table-sm table-borderless mb-0">
+              <tbody>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Access format</td>
+                <td class="col-8 py-0">{{ config.logger.access_format }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">File dispatch</td>
+                <td class="col-8 py-0"><i class="fa fa-{% if config.logger.file_dispatch %}check-{% endif %}square-o"
+                                          aria-hidden="true"></i></td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Level</td>
+                <td class="col-8 py-0">{{ config.logger.level }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Time format</td>
+                <td class="col-8 py-0">{{ config.logger.time_format }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h6 class="card-title fg-primary">Server configuration</h6>
+            <table class="table table-sm table-borderless mb-0">
+              <tbody>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">IP address</td>
+                <td class="col-8 py-0">{{ config.server.ip_address }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Port</td>
+                <td class="col-8 py-0">{{ config.server.port }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Upload limit</td>
+                <td class="col-8 py-0">{{ config.server.upload_limit | filesizeformat }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Workers</td>
+                <td class="col-8 py-0">{{ config.server.workers }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h6 class="card-title fg-primary">Session configuration</h6>
+            <table class="table table-sm table-borderless mb-0">
+              <tbody>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Cookie name</td>
+                <td class="col-8 py-0">{{ config.session.cookie_name }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Cookie secure</td>
+                <td class="col-8 py-0"><i class="fa fa-{% if config.session.cookie_secure %}check-{% endif %}square-o"
+                                          aria-hidden="true"></i></td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Secret key</td>
+                <td class="col-8 py-0">{{ config.session.secret_key }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4 mb-5">
+      <div class="col-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h6 class="card-title fg-primary">UI configuration</h6>
+            <table class="table table-sm table-borderless mb-0">
+              <tbody>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Paging number</td>
+                <td class="col-8 py-0">{{ config.ui.paging_num }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Primary color</td>
+                <td class="col-8 py-0"><i class="fa fa-circle fg-primary"
+                                          aria-hidden="true"></i> {{ config.ui.primary_color }}</td>
+              </tr>
+              <tr class="row mx-0">
+                <td class="col-4 font-weight-bolder py-0">Primary dark color</td>
+                <td class="col-8 py-0"><i class="fa fa-circle fg-primary-dark"
+                                          aria-hidden="true"></i> {{ config.ui.primary_dark_color }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

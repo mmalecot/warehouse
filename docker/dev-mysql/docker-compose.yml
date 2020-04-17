@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  mariadb:
+    image: mariadb:10.5
+    restart: always
+    environment:
+      MYSQL_DATABASE: warehouse
+      MYSQL_PASSWORD: warehouse
+      MYSQL_ROOT_PASSWORD: warehouse
+      MYSQL_USER: warehouse
+    ports:
+      - 3306:3306

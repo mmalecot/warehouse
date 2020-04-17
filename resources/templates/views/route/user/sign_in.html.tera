@@ -1,0 +1,48 @@
+{% extends "views/partial/base.html.tera" %}
+{% block title %}Sign in{% endblock title %}
+{% block body %}
+  {% include "views/partial/navbar.html.tera" %}
+  <div class="container">
+    <div class="row my-5">
+      <div class="col-md-10 col-lg-6 mx-auto">
+        <div class="card card-body shadow-sm border-0">
+          <form method="post" action="/user/sign_in" novalidate>
+            <h3 class="text-center mb-4">Sign in</h3>
+            {% if error %}
+              <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endif %}
+            <div class="form-group">
+              <input class="form-control" placeholder="Username or email" name="login" type="text" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="Password" name="password" type="password" required>
+            </div>
+            <a href="/user/sign_up" class="card-link d-block mb-2">Need an account? Sign up now.</a>
+            <div id="spinner" class="d-none justify-content-center my-3">
+              <div class="spinner-border fg-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <input class="btn btn-warehouse btn-block" value="Submit" type="submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
+{% block script %}
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $("form").submit(function (event) {
+              if ($(this)[0].checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  $(this).addClass("was-validated");
+              } else {
+                  $("input[type='submit']").prop("disabled", true);
+                  $("#spinner").addClass("d-flex");
+              }
+          });
+      });
+  </script>
+{% endblock script %}

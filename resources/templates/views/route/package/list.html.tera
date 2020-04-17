@@ -1,0 +1,119 @@
+{% extends "views/partial/base.html.tera" %}
+{% block title %}Packages{% endblock title %}
+{% block head %}
+  <style type="text/css">
+    .table {
+      border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+      overflow: hidden;
+    }
+
+    .table thead th {
+      border: 0;
+    }
+  </style>
+{% endblock head %}
+{% block body %}
+  {% include "views/partial/navbar.html.tera" %}
+  <div class="container">
+    <div class="row my-5">
+      <div class="col">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-0">
+            <table class="table table-striped mb-0">
+              <thead class="bg-warehouse text-white">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Version</th>
+                <th scope="col">Description</th>
+                <th scope="col">Architecture</th>
+                <th scope="col">License</th>
+                <th scope="col">Repository</th>
+                <th scope="col">Maintainer</th>
+              </tr>
+              </thead>
+              <tbody class="bg-white">
+              {% for package in packages %}
+                <tr>
+                  <td><a
+                        href="/package/{{ package.1.name }}/{{ package.0.architecture }}/{{ package.0.name }}">{{ package.0.name }}</a>
+                  </td>
+                  <td>{{ package.0.version }}</td>
+                  <td>{{ package.0.description }}</td>
+                  <td>{{ package.0.architecture }}</td>
+                  <td>{{ package.0.license }}</td>
+                  <td>{{ package.1.name | capitalize }}</td>
+                  <td>{{ package.2.name }}</td>
+                </tr>
+              {% endfor %}
+              {% if packages | length == 0 %}
+                <tr>
+                  <td class="text-muted text-center" colspan="100%">No package</td>
+                </tr>
+              {% endif %}
+              </tbody>
+            </table>
+          </div>
+          {% if packages | length > 0 %}
+            <div class="card-footer bg-white d-flex justify-content-between">
+              <div class="d-flex text-muted align-items-center">
+                {% if page_count > 1 %}
+                  <span>{{ page }} of {{ page_count }} pages ({{ packages | length }} {% if packages | length == 1 %}item{% else %}items{% endif %})</span>
+                {% endif %}
+              </div>
+              <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                  <li class="page-item{% if page == 1 %} disabled{% endif %}">
+                    <a class="page-link"
+                       href="{% if page == 1 %}#{% else %}{{ request.path }}?page={{ page - 1 }}{% endif %}"
+                       aria-label="Previous">
+                      <span aria-hidden="true">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item{% if page == 1 %} active{% endif %}"><a class="page-link"
+                                                                               href="{{ request.path }}">1</a>
+                  </li>
+                  {% if page_count > 1 %}
+                    {% if page > 2 %}
+                      <li class="page-item disabled"><a class="page-link" href="{{ request.path }}?page=1">&hellip;</a>
+                      </li>
+                      {% if page == page_count and page_count > 3 %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="{{ request.path }}?page={{ page - 2 }}">{{ page - 2 }}</a></li>
+                      {% endif %}
+                      <li class="page-item"><a class="page-link"
+                                               href="{{ request.path }}?page={{ page - 1 }}">{{ page - 1 }}</a></li>
+                    {% endif %}
+                    {% if page != 1 and page != page_count %}
+                      <li class="page-item active"><a class="page-link"
+                                                      href="{{ request.path }}?page={{ page }}">{{ page }}</a></li>
+                    {% endif %}
+                    {% if page < page_count - 1 %}
+                      <li class="page-item"><a class="page-link"
+                                               href="{{ request.path }}?page={{ page + 1 }}">{{ page + 1 }}</a></li>
+                      {% if page == 1 and page_count > 3 %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="{{ request.path }}?page={{ page + 2 }}">{{ page + 2 }}</a></li>
+                      {% endif %}
+                      <li class="page-item disabled"><a class="page-link" href="{{ request.path }}?page=1">&hellip;</a>
+                      </li>
+                    {% endif %}
+                    <li class="page-item {% if page == page_count %} active{% endif %}"><a class="page-link"
+                                                                                           href="{{ request.path }}?page={{ page_count }}">{{ page_count }}</a>
+                    </li>
+                  {% endif %}
+                  <li class="page-item{% if page == page_count %} disabled{% endif %}">
+                    <a class="page-link"
+                       href="{% if page == page_count %}#{% else %}{{ request.path }}?page={{ page + 1 }}{% endif %}"
+                       aria-label="Next">
+                      <span aria-hidden="true">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

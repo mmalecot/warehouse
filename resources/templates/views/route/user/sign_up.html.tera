@@ -1,0 +1,102 @@
+{% extends "views/partial/base.html.tera" %}
+{% block title %}Sign up{% endblock title %}
+{% block body %}
+  {% include "views/partial/navbar.html.tera" %}
+  <div class="container">
+    <div class="row my-5">
+      <div class="col-md-10 col-lg-6 mx-auto">
+        <div class="card card-body shadow-sm border-0">
+          <form method="post" action="/user/sign_up" novalidate>
+            <h3 class="text-center mb-4">Sign up</h3>
+            {% if error %}
+              <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endif %}
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-fw fa-user" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <input class="form-control" pattern="{{ regexes.username }}" placeholder="Username"
+                       name="username" type="text" required>
+                <div class="invalid-feedback">Must be 3-20 characters long, can only contain letters and numbers.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-fw fa-envelope" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <input class="form-control" pattern="{{ regexes.email }}" placeholder="Email address"
+                       name="email" type="text" required>
+                <div class="invalid-feedback">Must be a valid email address.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-fw fa-lock" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <input class="form-control" pattern="{{ regexes.password }}" placeholder="Password"
+                       name="password"
+                       type="password" required>
+                <div class="invalid-feedback">Must be 8-32 characters long.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-fw fa-check" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <input class="form-control" placeholder="Password confirmation"
+                       name="password_confirmation"
+                       type="password" required>
+                <div class="invalid-feedback">Must match the password.</div>
+              </div>
+            </div>
+            <a href="/user/sign_in" class="card-link d-block mb-2">Already have an account? Log in now.</a>
+            <div id="spinner" class="d-none justify-content-center my-3">
+              <div class="spinner-border fg-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <input class="btn btn-warehouse btn-block" value="Submit" type="submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
+{% block script %}
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $("input[name$='password_confirmation'], input[name$='password']").on('propertychange input', function () {
+              var password = $("input[name$='password']");
+              var confirm = $("input[name$='password_confirmation']");
+              if (confirm.val() !== password.val()) {
+                  confirm[0].setCustomValidity('Do not match the password.');
+              } else {
+                  confirm[0].setCustomValidity("");
+              }
+          });
+          $("form").submit(function (event) {
+              if ($(this)[0].checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  $(this).addClass("was-validated");
+              } else {
+                  $("input[type='submit']").prop("disabled", true);
+                  $("#spinner").addClass("d-flex");
+              }
+          });
+      });
+  </script>
+{% endblock script %}
