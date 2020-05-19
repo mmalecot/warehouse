@@ -2,7 +2,7 @@
 
 ![Platform](https://img.shields.io/badge/platform-linux-green.svg?logo=linux&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)
-![Rust](https://img.shields.io/badge/rust-1.42+-blueviolet.svg?logo=rust)
+![Rust](https://img.shields.io/badge/rust-1.43+-blueviolet.svg?logo=rust)
 
 Arch Linux repository manager.
 
