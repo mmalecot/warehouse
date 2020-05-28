@@ -16,7 +16,7 @@ actix-web = { version = "2.0", features = ["compress", "secure-cookies"] }
 alpm = { version = "0.8" }
 awmp = { version = "0.5", features = ["v2"] }
 base64 = { version = "0.12", features = ["std"] }
-bcrypt = { version = "0.7" }
+bcrypt = { version = "0.8" }
 chrono = { version = "0.4", features = ["serde", "std"] }
 colored = { version = "1.9" }
 derive_more = { version = "0.99", features = ["display", "from"] }
