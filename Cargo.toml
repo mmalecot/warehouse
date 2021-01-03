@@ -16,7 +16,7 @@ actix-web = { version = "2.0", features = ["compress", "secure-cookies"] }
 alpm = { version = "0.8" }
 awmp = { version = "0.5", features = ["v2"] }
 base64 = { version = "0.13", features = ["std"] }
-bcrypt = { version = "0.8" }
+bcrypt = { version = "0.9" }
 chrono = { version = "0.4", features = ["serde", "std"] }
 colored = { version = "2.0" }
 derive_more = { version = "0.99", features = ["display", "from"] }
@@ -27,11 +27,11 @@ futures = { version = "0.3" }
 log = { version = "0.4", features = ["serde", "std"] }
 num_cpus = { version = "1.13" }
 r2d2 = { version = "0.8" }
-rand = { version = "0.7", features = ["std"] }
+rand = { version = "0.8", features = ["std"] }
 regex = { version = "1.4" }
 serde = { version = "1.0" }
 tempfile = { version = "3.1" }
-tera = { version = "1.5", features = ["builtins"] }
+tera = { version = "1.6", features = ["builtins"] }
 toml = { version = "0.5" }
 uuid = { version = "0.8", features = ["v4"] }
 
